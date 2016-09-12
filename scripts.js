@@ -85,7 +85,6 @@ $('.idea-list').on('click', '.up-btn',  function() {
     var $quality = $(this).siblings('span').children();
     var newQuality = upQualities[$quality.text()];
     $quality.text(newQuality);
-
 });
 
 var downQualities = {
@@ -143,49 +142,6 @@ $('.idea-list').keypress(function(event) {
   }
 });
 
-$('.search-input').on('click', function() {
-  clearField($('.search-input'));
-});
-
-function findIdeaByTitle(title) {
-  var title = $('.search-input').val();
-  return this.storage.filter(function(idea) {
-    return idea.title === title;
-  });
-  // $('.idea-list').append();
-}
-
-$('.search-input').keypress(function(event) {
-  if (event.which === 13) {
-    var title = $('.search-input').val();
-    findIdeaByTitle(title);
-    clearIdeas();
-  }
-});
-
-function clearIdeas() {
-  $('.idea-list').remove();
-}
-
-// function findIdeaByBody() {
-//   var body = $('.search-input').val();
-//   return this.storage.filter(function(idea) {
-//     return idea.body === body;
-//   });
-// }
-
-$('.search-input').keypress(function(event) {
-  if (event.which === 13) {
-    var body = $('.search-input').val();
-    function findIdeaByBody(body) {
-      return this.storage.filter(function(idea) {
-        return idea.body === body;
-      });
-    }
-  }
-});
-
-
 function removeIdea(id) {
     var id = parseInt(id);
     storage = storage.filter(function(idea) {
@@ -198,4 +154,36 @@ $('.idea-list').on('click', '.delete-btn', function() {
   $(this).parent().parent().remove();
   removeIdea(id);
   localStorage.setItem('list', JSON.stringify(storage));
+});
+
+$('.search-input').on('click', function() {
+  clearField($('.search-input'));
+});
+
+function findIdeaByTitle(title) {
+  var title = $('.search-input').val();
+  return this.storage.filter(function(idea) {
+    return idea.title === title;
+  });
+}
+
+$('.search-input').keypress(function(event) {
+  if (event.which === 13) {
+    var title = $('.search-input').val();
+    findIdeaByTitle(title);
+  }
+});
+
+function findIdeaByBody(body) {
+  var body = $('.search-input').val();
+  return this.storage.filter(function(idea) {
+    return idea.body === body;
+  });
+}
+
+$('.search-input').keypress(function(event) {
+  if (event.which === 13) {
+    var body = $('.search-input').val();
+    findIdeaByBody(body);
+  }
 });
