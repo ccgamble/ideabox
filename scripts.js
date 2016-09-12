@@ -181,6 +181,7 @@ function findIdeaByBody(body) {
   });
 }
 
+
 $('.search-input').keypress(function(event) {
   if (event.which === 13) {
     var body = $('.search-input').val();
